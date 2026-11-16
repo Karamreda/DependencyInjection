@@ -1,0 +1,63 @@
+﻿@model IEnumerable<string>
+
+@* 
+    View Injection:
+    The @inject directive allows us to inject a service directly
+    into a Razor View without passing it from the Controller.
+
+    ICitiesService is the service interface,
+    and citiesServiceInView is the variable used to access it.
+*@
+@inject ICitiesService citiesServiceInView
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<h1>Cities</h1>
+
+@{
+    // Calling the service directly from the View.
+    // This demonstrates how an injected service can be used
+    // inside a Razor View.
+    List<string> citiesFromServiceInView = citiesServiceInView.GetCities();
+}
+
+<ul class="list">
+    @foreach (var city in citiesFromServiceInView)
+    {
+        <li>@city</li>
+    }
+</ul>
+
+<div>
+    @*
+        Displaying the IDs of the injected service instances
+        to demonstrate the behavior of Autofac Lifetime Scopes.
+
+        Since CitiesService is registered using
+        InstancePerLifetimeScope(), the three services injected
+        into the same Controller share the same instance.
+    *@
+
+    <p>Service Instance 1: @ViewBag.ServiceInstance1</p>
+    <p>Service Instance 2: @ViewBag.ServiceInstance2</p>
+    <p>Service Instance 3: @ViewBag.ServiceInstance3</p>
+
+    @*
+        This ID belongs to a service resolved inside a new
+        Autofac Lifetime Scope created in the Controller.
+
+        It should be different from the Controller's instance ID.
+    *@
+    <p>Instance from Scope: @ViewBag.InstanceFromScope</p>
+
+    @*
+        This ID belongs to the service injected directly into the View.
+
+        The View receives its own dependency through View Injection.
+        Because it belongs to the same HTTP Request Scope,
+        it shares the same CitiesService instance as the Controller.
+    *@
+    <p>Instance from View: @citiesServiceInView.serviceInstanceID</p>
+</div>

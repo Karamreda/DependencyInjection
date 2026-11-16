@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "799aRiU0y3E=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\m.g\\Desktop\\DIExample\\DIExample\\DIExample.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\m.g\\.nuget\\packages\\autofac\\9.3.4\\autofac.9.3.4.nupkg.sha512",
+    "C:\\Users\\m.g\\.nuget\\packages\\autofac.extensions.dependencyinjection\\11.0.2\\autofac.extensions.dependencyinjection.11.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
